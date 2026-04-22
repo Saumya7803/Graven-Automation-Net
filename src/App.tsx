@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { InstallPrompt } from "@/components/ui/InstallPrompt";
 import { PushNotificationBanner } from "@/components/ui/PushNotificationBanner";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 
 // Eager load critical pages
 import Home from "./pages/Home";
@@ -123,6 +124,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <div className="main-content">
             <Suspense fallback={<PageLoader />}>
               <Routes>
