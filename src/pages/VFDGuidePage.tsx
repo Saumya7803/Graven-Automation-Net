@@ -17,6 +17,7 @@ import TableOfContents from "@/components/knowledge-hub/TableOfContents";
 import ArticleNavigation from "@/components/knowledge-hub/ArticleNavigation";
 import MobileKnowledgeNav from "@/components/knowledge-hub/MobileKnowledgeNav";
 import ReadingProgress from "@/components/knowledge-hub/ReadingProgress";
+import { SUPABASE_URL } from "@/integrations/supabase/config";
 
 interface KnowledgePage {
   id: string;
@@ -132,7 +133,7 @@ const VFDGuidePage = () => {
     publishedDate: new Date().toISOString(),
     modifiedDate: new Date().toISOString(),
     author: "VFD India Experts",
-    image: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/content-images/vfd-guide-header.jpg`,
+    image: `${SUPABASE_URL}/storage/v1/object/public/content-images/vfd-guide-header.jpg`,
   });
 
   const faqSchema = page.faqs?.length ? generateFAQSchema(page.faqs) : null;

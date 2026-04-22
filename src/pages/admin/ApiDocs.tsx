@@ -13,6 +13,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Copy, Key, Trash2, Plus } from "lucide-react";
+import { SUPABASE_URL } from "@/integrations/supabase/config";
 
 interface ApiKey {
   id: string;
@@ -126,7 +127,7 @@ export default function ApiDocs() {
     toast.success("Copied to clipboard");
   };
 
-  const functionsBaseUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`;
+  const functionsBaseUrl = `${SUPABASE_URL}/functions/v1`;
   const exampleCurl = `curl -X GET "${functionsBaseUrl}/crm-api/rfqs?status=pending&limit=10" \\
   -H "Authorization: Bearer YOUR_API_KEY"`;
 

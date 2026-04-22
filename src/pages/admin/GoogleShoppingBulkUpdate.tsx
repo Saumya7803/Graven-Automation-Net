@@ -11,6 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { SUPABASE_URL } from "@/integrations/supabase/config";
 import { CSVUploader } from "@/components/admin/CSVUploader";
 import { GoogleCategoryAutocomplete } from "@/components/admin/GoogleCategoryAutocomplete";
 import {
@@ -832,7 +833,7 @@ export default function GoogleShoppingBulkUpdate() {
               </Button>
               <Button variant="outline" asChild>
                 <a
-                  href={`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-google-shopping-feed`}
+                  href={`${SUPABASE_URL}/functions/v1/generate-google-shopping-feed`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

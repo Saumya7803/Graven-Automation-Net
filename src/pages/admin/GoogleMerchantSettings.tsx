@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { SUPABASE_URL } from "@/integrations/supabase/config";
 import { Loader2, CheckCircle, XCircle, RefreshCw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
@@ -46,7 +47,7 @@ export default function GoogleMerchantSettings() {
     setConnecting(true);
     try {
       // Redirect to OAuth flow
-      window.location.href = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/google-merchant-auth`;
+      window.location.href = `${SUPABASE_URL}/functions/v1/google-merchant-auth`;
     } catch (error: any) {
       toast({
         title: "Connection failed",

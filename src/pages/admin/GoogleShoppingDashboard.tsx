@@ -28,6 +28,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { formatDistanceToNow } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { SUPABASE_URL } from "@/integrations/supabase/config";
 import type { ValidationResults } from "@/types/googleShopping";
 
 export default function GoogleShoppingDashboard() {
@@ -145,7 +146,7 @@ export default function GoogleShoppingDashboard() {
     }
   };
 
-  const feedUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-google-shopping-feed`;
+  const feedUrl = `${SUPABASE_URL}/functions/v1/generate-google-shopping-feed`;
 
   const handleCopyFeedUrl = () => {
     navigator.clipboard.writeText(feedUrl);
