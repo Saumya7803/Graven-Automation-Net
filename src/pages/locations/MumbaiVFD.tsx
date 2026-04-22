@@ -1,0 +1,159 @@
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import SEOHead from "@/components/SEO/SEOHead";
+import StructuredData from "@/components/SEO/StructuredData";
+import { BreadcrumbSchema } from "@/components/SEO/BreadcrumbSchema";
+import { generateOrganizationSchema } from "@/lib/seo";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { MapPin, Phone, Mail, Clock, Award, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
+
+export default function MumbaiVFD() {
+  const breadcrumbItems = [
+    { name: "Home", url: "/" },
+    { name: "Locations", url: "/" },
+    { name: "Mumbai", url: "/locations/mumbai" },
+  ];
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Schneider Electric VFD Solutions - Mumbai",
+    image: "https://schneidervfd.com/company-logo.png",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Andheri East",
+      addressLocality: "Mumbai",
+      addressRegion: "Maharashtra",
+      postalCode: "400069",
+      addressCountry: "IN",
+    },
+    telephone: "+91-22-XXXX-XXXX",
+    priceRange: "₹₹₹",
+    areaServed: ["Mumbai", "Navi Mumbai", "Thane", "Pune"],
+  };
+
+  return (
+    <>
+      <SEOHead
+        title="VFD Supplier in Mumbai | Schneider Electric Drives Maharashtra"
+        description="Top VFD supplier in Mumbai. Authorized Schneider Electric distributor for ATV310, ATV320, ATV930 drives. Serving Mumbai, Navi Mumbai, Thane with expert installation & support."
+        keywords="vfd mumbai, vfd supplier mumbai, schneider vfd mumbai, variable frequency drive maharashtra, vfd thane, vfd pune"
+        canonical="/locations/mumbai"
+      />
+      <StructuredData data={generateOrganizationSchema()} />
+      <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
+      <BreadcrumbSchema items={breadcrumbItems} />
+
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-muted/20">
+        <Header />
+        
+        <main className="flex-1">
+          <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-primary/5">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto text-center">
+                <div className="flex items-center justify-center gap-2 mb-6">
+                  <MapPin className="h-6 w-6 text-primary" />
+                  <span className="text-primary font-semibold">Mumbai, Maharashtra</span>
+                </div>
+                <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                  VFD Solutions for Mumbai's Industries
+                </h1>
+                <p className="text-xl text-muted-foreground mb-8">
+                  Leading supplier of Schneider Electric VFDs in Mumbai, serving manufacturing, textile, and industrial sectors
+                </p>
+                <div className="flex flex-wrap gap-4 justify-center">
+                  <Button size="lg" asChild>
+                    <Link to="/contact">Get Quote</Link>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <Link to="/shop">View Products</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="py-16">
+            <div className="container mx-auto px-4">
+              <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <Phone className="h-8 w-8 text-primary mx-auto mb-4" />
+                    <h3 className="font-semibold mb-2">Contact</h3>
+                    <p className="text-muted-foreground">+91-22-XXXX-XXXX</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <Mail className="h-8 w-8 text-primary mx-auto mb-4" />
+                    <h3 className="font-semibold mb-2">Email</h3>
+                    <p className="text-muted-foreground">mumbai@schneidervfd.com</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <Clock className="h-8 w-8 text-primary mx-auto mb-4" />
+                    <h3 className="font-semibold mb-2">Hours</h3>
+                    <p className="text-muted-foreground">Mon-Sat: 9 AM - 7 PM</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </section>
+
+          <section className="py-16 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <div className="flex items-center gap-3 mb-8">
+                  <Award className="h-8 w-8 text-primary" />
+                  <h2 className="text-3xl font-bold">Mumbai's Trusted VFD Partner</h2>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    "15+ years serving Mumbai industries",
+                    "Fast delivery across Mumbai & Thane",
+                    "Expert installation team",
+                    "24/7 emergency support",
+                    "Textile industry specialist",
+                    "300+ Mumbai installations",
+                  ].map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <CheckCircle2 className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+                      <p className="text-muted-foreground">{benefit}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="py-16">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-3xl font-bold mb-8 text-center">Service Coverage in Mumbai</h2>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {[
+                    "Andheri", "Bandra", "Borivali",
+                    "Goregaon", "Malad", "Powai",
+                    "Navi Mumbai", "Thane", "Kalyan",
+                    "Vashi", "Panvel", "All Mumbai Suburbs"
+                  ].map((area, index) => (
+                    <Card key={index}>
+                      <CardContent className="p-4 text-center">
+                        <p className="font-medium">{area}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <Footer />
+      </div>
+    </>
+  );
+}

@@ -1,0 +1,1 @@
+ALTER TABLE products ALTER COLUMN power_range DROP NOT NULL;

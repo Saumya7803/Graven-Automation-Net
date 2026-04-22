@@ -1,0 +1,263 @@
+/* Imports */
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;family=Lato:wght@300;400;700;900&amp;display=swap");
+
+/* Variables */
+:root {
+  /* Fonts */
+  --headings: "EB Garamond", serif;
+  --paragraph: 'Lato', sans-serif;
+
+  /* Colors */
+  --primary: #0a499b;
+  --titlecolor: #0a499b;
+  --titlecolor2: #35c8fe;
+  --bglight: #f7faff;
+  --secondary: #01a0da;
+  --black: #1e1e1e;
+  --white: #ffffff;
+  --para: #403f3f;
+  --lightgray: rgb(103, 103, 103);
+
+  /* Shadow */
+  --shadow: 0px 4px 20px 0px #ccc7ff;
+}
+
+/* Default */
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-color: var(--primary) transparent;
+  scrollbar-width: thin;
+}
+
+*::selection {
+  background: var(--secondary);
+  color: var(--white);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--paragraph);
+  background: var(--white);
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+b,
+i,
+u,
+ul,
+ol,
+li,
+span {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+img,
+video {
+  width: 100%;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--dark);
+  line-height: 160%;
+  margin: 0 !important;
+  letter-spacing: 0.5px;
+  font-family: var(--paragraph);
+}
+
+p a {
+  color: var(--primary);
+  transition: 0.5s ease all;
+}
+
+p a:hover {
+  color: var(--secondary);
+}
+
+/* Background */
+.bg-primary {
+  background: var(--primary) !important;
+}
+
+.bg-secondary {
+  background: var(--secondary) !important;
+}
+
+.bg-light {
+  background: var(--white) !important;
+}
+
+.bg-light-alt {
+  background: var(--light-alt) !important;
+}
+
+.bg-dark {
+  background: var(--dark) !important;
+}
+
+.bg-dark-alt {
+  background: var(--dark-alt) !important;
+}
+
+.bg-black {
+  background: var(--black) !important;
+}
+
+/* Color */
+.text-primary {
+  color: var(--primary) !important;
+}
+
+.text-secondary {
+  color: var(--secondary) !important;
+}
+
+.text-light {
+  color: var(--white) !important;
+}
+
+.text-light-alt {
+  color: var(--light-alt) !important;
+}
+
+.text-dark {
+  color: var(--dark) !important;
+}
+
+.text-dark-alt {
+  color: var(--dark-alt) !important;
+}
+
+.text-black {
+  color: var(--black) !important;
+}
+
+/* Section */
+.section {
+  width: 100%;
+  padding: 60px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.section .container,
+.section .container-fluid {
+  /* position: relative; */
+  z-index: 2;
+}
+
+@media (min-width: 1920px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1200px;
+  }
+
+  .container-fluid {
+    width: 1920px;
+    /* width: 1920; */
+  }
+}
+
+/* Button */
+.button {
+  display: inline-block;
+  padding: 8px 20px;
+  outline: 0;
+  border: 1px solid var(--secondary);
+  background-color: var(--secondary);
+  font-family: var(--para);
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffffc7;
+  letter-spacing: 1.2px;
+  text-decoration: none;
+  transition: 0.5s ease;
+}
+
+.button:hover {
+  border: 1px solid var(--white);
+  background-color: var(--white);
+  color: var(--secondary);
+  text-decoration: none;
+  transition: 0.5s ease;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+/* Headings */
+.sub-heading {
+  font-size: 40px;
+  font-weight: 700;
+  font-family: var(--headings);
+}
+
+.tertiary-heading {
+  font-size: 25px;
+  font-weight: 500;
+  font-family: var(--headings);
+}
+
+
+.heading {
+  font-size: 55px;
+  line-height: 100%;
+  font-weight: 500;
+  font-family: var(--headings);
+}
+
+@media screen and (max-width:992px) {
+  .heading {
+    font-size: 36px;
+  }
+
+}
+
+@media screen and (max-width:992px) {
+  .heading {
+    font-size: 30px;
+  }
+}
+
+/* CONTAINERS */
+
+
+/* CONTAINERS */

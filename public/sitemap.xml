@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Main Sitemap - Static Pages -->
+  <sitemap>
+    <loc>https://schneidervfd.com/sitemap-static.xml</loc>
+    <lastmod>2025-01-01</lastmod>
+  </sitemap>
+  
+  <!-- Dynamic Sitemap - Products & Blog Posts -->
+  <sitemap>
+    <loc>https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/generate-sitemap</loc>
+    <lastmod>2025-01-01</lastmod>
+  </sitemap>
+  
+  <!-- Image Sitemap -->
+  <sitemap>
+    <loc>https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/generate-image-sitemap</loc>
+    <lastmod>2025-01-01</lastmod>
+  </sitemap>
+
+</sitemapindex>
