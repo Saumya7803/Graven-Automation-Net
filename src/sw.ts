@@ -1,8 +1,14 @@
 /// <reference lib="webworker" />
-import { precacheAndRoute } from 'workbox-precaching';
+import { clientsClaim } from 'workbox-core';
+import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from './integrations/supabase/config';
 
 declare const self: ServiceWorkerGlobalScope;
+
+// Activate new service worker immediately and take control of existing clients.
+self.skipWaiting();
+clientsClaim();
+cleanupOutdatedCaches();
 
 // Precache assets
 precacheAndRoute(self.__WB_MANIFEST);

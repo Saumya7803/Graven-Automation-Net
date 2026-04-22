@@ -28,6 +28,10 @@ export default defineConfig(({ mode }) => {
         strategies: "injectManifest",
         srcDir: "src",
         filename: "sw.ts",
+        injectManifest: {
+          // Do not precache legacy static site pages in the app shell SW.
+          globIgnores: ["legacy-home/**"],
+        },
         includeAssets: ["favicon.ico", "robots.txt", "icon-192.png", "icon-512.png"],
         manifest: {
           name: "Schneider Electric VFD Solutions",
