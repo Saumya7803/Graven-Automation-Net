@@ -65,6 +65,12 @@ serve(async (req) => {
     const resend = new Resend(Deno.env.get("RESEND_API_KEY") ?? "");
 
     const { campaignId }: CampaignRequest = await req.json();
+    if (!campaignId) {
+      return new Response(JSON.stringify({ error: "campaignId is required" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     console.log(`Processing campaign: ${campaignId}`);
 

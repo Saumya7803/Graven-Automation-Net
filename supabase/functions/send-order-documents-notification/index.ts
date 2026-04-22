@@ -20,7 +20,13 @@ const handler = async (req: Request): Promise<Response> => {
     const { orderId, documentTypes }: DocumentNotificationRequest = await req.json();
 
     if (!orderId || !documentTypes || documentTypes.length === 0) {
-      throw new Error("Order ID and document types are required");
+      return new Response(
+        JSON.stringify({ error: "Order ID and document types are required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
     }
 
     // Initialize Supabase client

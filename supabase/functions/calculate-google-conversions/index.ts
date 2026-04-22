@@ -21,7 +21,10 @@ Deno.serve(async (req) => {
     const { orderId } = await req.json();
 
     if (!orderId) {
-      throw new Error('orderId is required');
+      return new Response(
+        JSON.stringify({ error: 'orderId is required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
 
     // Get order with UTM data

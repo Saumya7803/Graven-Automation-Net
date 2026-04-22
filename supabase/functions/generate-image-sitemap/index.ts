@@ -12,8 +12,15 @@ serve(async (req) => {
   }
 
   try {
-    const supabaseUrl = Deno.env.get("VITE_SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("VITE_SUPABASE_PUBLISHABLE_KEY")!;
+    const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? Deno.env.get("VITE_SUPABASE_URL");
+    const supabaseKey =
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ??
+      Deno.env.get("SUPABASE_ANON_KEY") ??
+      Deno.env.get("VITE_SUPABASE_PUBLISHABLE_KEY");
+
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error("Supabase environment variables are not configured");
+    }
     const supabase = createClient(supabaseUrl, supabaseKey);
 
     const frontendUrl = (Deno.env.get("FRONTEND_URL") || "https://schneidervfd.com").replace(/\/+$/, '');

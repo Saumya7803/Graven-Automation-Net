@@ -19,6 +19,13 @@ serve(async (req) => {
 
     const { userId, notification, notificationType } = await req.json();
 
+    if (!userId || !notificationType || !notification?.title || !notification?.body) {
+      return new Response(
+        JSON.stringify({ error: 'Missing required fields: userId, notificationType, notification.title, notification.body' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     console.log('Sending push notification:', { userId, notificationType });
 
     // Get user's push subscriptions

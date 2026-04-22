@@ -20,7 +20,10 @@ const handler = async (req: Request): Promise<Response> => {
     const { orderId }: OrderConfirmationRequest = await req.json();
 
     if (!orderId) {
-      throw new Error("Order ID is required");
+      return new Response(
+        JSON.stringify({ error: "Order ID is required" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
     }
 
     const branding = getBranding();

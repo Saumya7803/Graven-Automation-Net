@@ -24,6 +24,15 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const { quotationId, customerEmail, customerName, missingFields, userId }: RequestBody = await req.json();
+    if (!quotationId || !customerEmail || !customerName || !Array.isArray(missingFields)) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Missing required fields" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
 
     console.log("📧 Sending profile completion reminder:", { quotationId, customerEmail, missingFields });
 
@@ -221,3 +230,4 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 serve(handler);
+

@@ -18,6 +18,19 @@ interface FinalizedNotificationRequest {
   itemCount: number;
 }
 
+const isValidFinalizedRequest = (data: Partial<FinalizedNotificationRequest>) => {
+  return Boolean(
+    data.adminEmail &&
+      data.customerName &&
+      data.customerEmail &&
+      data.customerId &&
+      data.quotationNumber &&
+      data.quotationId &&
+      typeof data.finalAmount === "number" &&
+      typeof data.itemCount === "number"
+  );
+};
+
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -25,6 +38,12 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const data: FinalizedNotificationRequest = await req.json();
+    if (!isValidFinalizedRequest(data)) {
+      return new Response(JSON.stringify({ error: "Missing required fields" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
     console.log("Sending finalized notification to admin:", data.adminEmail);
 
     const supabase = createClient(

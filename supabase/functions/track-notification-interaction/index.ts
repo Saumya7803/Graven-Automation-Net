@@ -13,31 +13,23 @@ serve(async (req) => {
 
   try {
     const { notificationId, action, timestamp } = await req.json();
+    if (!notificationId || !action || !timestamp) {
+      return new Response(
+        JSON.stringify({ error: 'Missing required fields: notificationId, action, timestamp' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
     
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Get user from JWT
-    const authHeader = req.headers.get('Authorization');
-    if (!authHeader) {
-      throw new Error('No authorization header');
-    }
-
-    const token = authHeader.replace('Bearer ', '');
-    const { data: { user }, error: userError } = await supabase.auth.getUser(token);
-    
-    if (userError || !user) {
-      throw new Error('Invalid user');
-    }
-
-    // Find the notification log entry
+    // Resolve user from notification log so service worker requests (anon key) can still be tracked.
     const { data: notificationLog } = await supabase
       .from('notification_logs')
-      .select('id')
+      .select('id, user_id')
       .eq('id', notificationId)
-      .eq('user_id', user.id)
       .maybeSingle();
 
     if (!notificationLog) {
@@ -51,7 +43,7 @@ serve(async (req) => {
     // Record interaction
     const interactionData: any = {
       notification_log_id: notificationId,
-      user_id: user.id,
+      user_id: notificationLog.user_id,
       action_taken: action,
     };
 
@@ -82,7 +74,7 @@ serve(async (req) => {
         .eq('id', notificationId);
     }
 
-    console.log('Tracked interaction:', { notificationId, action, user: user.id });
+    console.log('Tracked interaction:', { notificationId, action, user: notificationLog.user_id });
 
     return new Response(
       JSON.stringify({ success: true }),

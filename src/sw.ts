@@ -93,10 +93,18 @@ self.addEventListener('pushsubscriptionchange', (event: any) => {
       userVisibleOnly: true,
       applicationServerKey: event.oldSubscription?.options.applicationServerKey
     }).then((subscription) => {
-      return fetch('/api/update-push-subscription', {
+      return fetch(`${SUPABASE_URL}/functions/v1/update-push-subscription`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(subscription)
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_PUBLISHABLE_KEY,
+          'Authorization': `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
+        },
+        body: JSON.stringify({
+          oldEndpoint: event.oldSubscription?.endpoint,
+          subscription: subscription.toJSON(),
+          userAgent: self.navigator.userAgent
+        })
       });
     })
   );

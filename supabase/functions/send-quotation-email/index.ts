@@ -14,6 +14,12 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const { quotationId } = await req.json();
+    if (!quotationId) {
+      return new Response(JSON.stringify({ error: "quotationId is required" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
     console.log("Fetching quotation data for ID:", quotationId);
 
     const branding = getBranding();

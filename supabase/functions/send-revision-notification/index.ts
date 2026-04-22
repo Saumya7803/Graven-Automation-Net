@@ -22,6 +22,22 @@ interface RevisionNotificationRequest {
   };
 }
 
+const isValidRevisionRequest = (data: Partial<RevisionNotificationRequest>) => {
+  return Boolean(
+    data.adminEmail &&
+      data.customerName &&
+      data.customerEmail &&
+      data.customerId &&
+      data.quotationNumber &&
+      data.quotationId &&
+      data.revisionMessage &&
+      data.currentQuote &&
+      typeof data.currentQuote.totalAmount === "number" &&
+      typeof data.currentQuote.finalAmount === "number" &&
+      typeof data.currentQuote.itemCount === "number"
+  );
+};
+
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -29,6 +45,12 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const data: RevisionNotificationRequest = await req.json();
+    if (!isValidRevisionRequest(data)) {
+      return new Response(JSON.stringify({ error: "Missing required fields" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
     console.log("Sending revision notification to admin:", data.adminEmail);
 
     const supabase = createClient(

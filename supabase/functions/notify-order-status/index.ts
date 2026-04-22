@@ -21,6 +21,13 @@ serve(async (req) => {
     const branding = getBranding();
     const { orderId, status } = await req.json();
 
+    if (!orderId || !status) {
+      return new Response(
+        JSON.stringify({ error: 'Missing required fields: orderId, status' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     console.log('Notifying order status change:', { orderId, status });
 
     // Get order details

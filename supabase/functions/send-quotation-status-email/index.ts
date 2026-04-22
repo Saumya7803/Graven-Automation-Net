@@ -21,6 +21,13 @@ serve(async (req) => {
     const branding = getBranding();
     const { quotationId, status, previousStatus } = await req.json();
 
+    if (!quotationId || !status) {
+      return new Response(
+        JSON.stringify({ error: 'Missing required fields: quotationId, status' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     console.log('Sending quotation status email:', { quotationId, status, previousStatus });
 
     const { data: quotation, error: quotationError } = await supabase

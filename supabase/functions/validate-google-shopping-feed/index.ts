@@ -1,6 +1,5 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { DOMParser, Element } from "https://deno.land/x/deno_dom@v0.1.38/deno-dom-wasm.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -22,6 +21,10 @@ interface ValidationRule {
   allowedValues?: string[];
 }
 
+interface FeedItem {
+  xml: string;
+}
+
 const GOOGLE_SHOPPING_RULES: ValidationRule[] = [
   { field: 'g:id', required: true },
   { field: 'title', required: true, maxLength: 150 },
@@ -35,6 +38,20 @@ const GOOGLE_SHOPPING_RULES: ValidationRule[] = [
   { field: 'g:mpn', required: true }, // MPN (SKU) is now required
   { field: 'g:google_product_category', required: false },
 ];
+
+const escapeRegex = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const getTagValue = (xml: string, tagName: string): string => {
+  const escapedTag = escapeRegex(tagName);
+  const regex = new RegExp(`<${escapedTag}>([\\s\\S]*?)<\\/${escapedTag}>`, "i");
+  const match = xml.match(regex);
+  return match?.[1]?.trim() || "";
+};
+
+const extractItems = (feedXml: string): FeedItem[] => {
+  const matches = Array.from(feedXml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi));
+  return matches.map((match) => ({ xml: match[1] ?? "" }));
+};
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -60,25 +77,11 @@ serve(async (req) => {
     const feedXml = await feedResponse.text();
     console.log('Feed fetched, length:', feedXml.length);
 
-    // Parse XML
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(feedXml, 'text/xml');
-    
-    if (!xmlDoc) {
-      throw new Error('Failed to parse XML');
-    }
-
-    // Check for parse errors
-    const parseError = xmlDoc.querySelector('parsererror');
-    if (parseError) {
-      throw new Error(`XML parsing error: ${parseError.textContent}`);
-    }
-
     const errors: ValidationIssue[] = [];
     const warnings: ValidationIssue[] = [];
 
     // Get all items
-    const items = Array.from(xmlDoc.querySelectorAll('item'));
+    const items = extractItems(feedXml);
     console.log(`Found ${items.length} products to validate`);
 
     if (items.length === 0) {
@@ -90,14 +93,10 @@ serve(async (req) => {
     }
 
     // Validate each item
-    items.forEach((node) => {
-      const item = node as Element;
-      const getElementText = (tagName: string): string => {
-        const element = item.querySelector(tagName);
-        return element?.textContent?.trim() || '';
-      };
+    items.forEach((item) => {
+      const getElementText = (tagName: string): string => getTagValue(item.xml, tagName);
 
-      const productId = getElementText('g\\:id') || getElementText('id');
+      const productId = getElementText('g:id') || getElementText('id');
 
       // Validate against rules
       GOOGLE_SHOPPING_RULES.forEach((rule) => {
@@ -170,7 +169,7 @@ serve(async (req) => {
         });
       }
 
-      const imageLink = getElementText('g\\:image_link');
+      const imageLink = getElementText('g:image_link');
       if (imageLink && imageLink.includes('placeholder.svg')) {
         warnings.push({
           type: 'warning',
@@ -180,7 +179,7 @@ serve(async (req) => {
         });
       }
 
-      const availability = getElementText('g\\:availability');
+      const availability = getElementText('g:availability');
       if (availability === 'out_of_stock') {
         warnings.push({
           type: 'warning',

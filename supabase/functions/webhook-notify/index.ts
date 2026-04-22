@@ -23,6 +23,13 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const { event_type, resource_type, resource_id }: WebhookPayload = await req.json();
+
+    if (!event_type || !resource_type || !resource_id) {
+      return new Response(
+        JSON.stringify({ error: 'Missing required fields: event_type, resource_type, resource_id' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
     
     console.log(`Processing webhook for ${event_type}: ${resource_type} ${resource_id}`);
 
@@ -45,7 +52,7 @@ Deno.serve(async (req) => {
     }
 
     // Fetch the resource data
-    let resourceData;
+    let resourceData: any;
     if (resource_type === 'rfq') {
       const { data, error } = await supabase
         .from('quotation_requests')
@@ -95,6 +102,13 @@ Deno.serve(async (req) => {
       
       if (error) throw error;
       resourceData = data;
+    }
+
+    if (!resourceData) {
+      return new Response(
+        JSON.stringify({ error: `Unsupported resource_type: ${resource_type}` }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
 
     // Build webhook payload
