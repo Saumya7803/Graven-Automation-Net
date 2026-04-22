@@ -1744,11 +1744,7 @@ textarea.is-invalid {
     justify-content: center;
 }
 .th-preloader .animation-preloader {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    position: static;
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
