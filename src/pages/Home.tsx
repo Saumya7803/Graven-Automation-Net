@@ -29,9 +29,29 @@ const Home = () => {
     const iframe = iframeRef.current;
     if (!iframe) return;
 
+    iframe.setAttribute("scrolling", "no");
+    iframe.style.overflow = "hidden";
+
     let resizeObserver: ResizeObserver | null = null;
     let intervalId: number | null = null;
     let cleanupLegacyLinks: (() => void) | null = null;
+
+    const disableLegacyFrameScrolling = () => {
+      try {
+        const doc = iframe.contentDocument;
+        if (!doc) return;
+
+        if (doc.documentElement) {
+          doc.documentElement.style.overflow = "hidden";
+        }
+
+        if (doc.body) {
+          doc.body.style.overflow = "hidden";
+        }
+      } catch (error) {
+        console.error("Unable to disable legacy iframe scrolling", error);
+      }
+    };
 
     const removeLegacyPreloader = () => {
       try {
@@ -103,6 +123,7 @@ const Home = () => {
 
     const handleLoad = () => {
       removeLegacyPreloader();
+      disableLegacyFrameScrolling();
       updateHeight();
       wireLegacyLinks();
 
@@ -152,8 +173,9 @@ const Home = () => {
         ref={iframeRef}
         src={LEGACY_HOME_SRC}
         title="Graven Automation Homepage"
+        scrolling="no"
         className="block w-full"
-        style={{ height: `${frameHeight}px`, border: 0 }}
+        style={{ height: `${frameHeight}px`, border: 0, overflow: "hidden" }}
       />
     </div>
   );
