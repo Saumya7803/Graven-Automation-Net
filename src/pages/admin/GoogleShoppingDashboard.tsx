@@ -145,7 +145,7 @@ export default function GoogleShoppingDashboard() {
     }
   };
 
-  const feedUrl = `https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/generate-google-shopping-feed`;
+  const feedUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-google-shopping-feed`;
 
   const handleCopyFeedUrl = () => {
     navigator.clipboard.writeText(feedUrl);

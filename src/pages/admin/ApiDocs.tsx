@@ -126,7 +126,8 @@ export default function ApiDocs() {
     toast.success("Copied to clipboard");
   };
 
-  const exampleCurl = `curl -X GET "https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/crm-api/rfqs?status=pending&limit=10" \\
+  const functionsBaseUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`;
+  const exampleCurl = `curl -X GET "${functionsBaseUrl}/crm-api/rfqs?status=pending&limit=10" \\
   -H "Authorization: Bearer YOUR_API_KEY"`;
 
   const exampleResponse = `{
@@ -419,7 +420,7 @@ export default function ApiDocs() {
                 <div className="relative">
                   <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
                     <code className="text-sm">{`const response = await fetch(
-  'https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/crm-api/rfqs?status=pending',
+  '${functionsBaseUrl}/crm-api/rfqs?status=pending',
   {
     headers: {
       'Authorization': 'Bearer YOUR_API_KEY'

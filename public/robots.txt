@@ -19,5 +19,5 @@ Disallow: /my-quotations/
 
 # Sitemap locations
 Sitemap: https://schneidervfd.com/sitemap-static.xml
-Sitemap: https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/generate-sitemap
-Sitemap: https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/generate-image-sitemap
+Sitemap: https://izphkdvrexejctdabplp.supabase.co/functions/v1/generate-sitemap
+Sitemap: https://izphkdvrexejctdabplp.supabase.co/functions/v1/generate-image-sitemap

@@ -132,7 +132,7 @@ const VFDGuidePage = () => {
     publishedDate: new Date().toISOString(),
     modifiedDate: new Date().toISOString(),
     author: "VFD India Experts",
-    image: "https://ubvbvmxlwffzwrtuuxrt.supabase.co/storage/v1/object/public/content-images/vfd-guide-header.jpg",
+    image: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/content-images/vfd-guide-header.jpg`,
   });
 
   const faqSchema = page.faqs?.length ? generateFAQSchema(page.faqs) : null;

@@ -9,13 +9,13 @@
   
   <!-- Dynamic Sitemap - Products & Blog Posts -->
   <sitemap>
-    <loc>https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/generate-sitemap</loc>
+    <loc>https://izphkdvrexejctdabplp.supabase.co/functions/v1/generate-sitemap</loc>
     <lastmod>2025-01-01</lastmod>
   </sitemap>
   
   <!-- Image Sitemap -->
   <sitemap>
-    <loc>https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/generate-image-sitemap</loc>
+    <loc>https://izphkdvrexejctdabplp.supabase.co/functions/v1/generate-image-sitemap</loc>
     <lastmod>2025-01-01</lastmod>
   </sitemap>
 

@@ -302,7 +302,7 @@ ORDER BY created_at ASC;
 **Issue 2: Webhook tracking not working**
 - Verify `RESEND_SIGNING_SECRET` is correct (starts with `whsec_`)
 - Check webhook is configured in Resend dashboard
-- Webhook URL: `https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/resend-webhook`
+- Webhook URL: `https://izphkdvrexejctdabplp.supabase.co/functions/v1/resend-webhook`
 - Events enabled: `email.delivered`, `email.opened`, `email.clicked`
 
 **Issue 3: Links in emails don't work**

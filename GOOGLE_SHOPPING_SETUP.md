@@ -6,7 +6,7 @@ This document provides instructions for setting up and using the Google Shopping
 
 The automated Google Shopping feed is now available at:
 ```
-https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/generate-google-shopping-feed
+https://izphkdvrexejctdabplp.supabase.co/functions/v1/generate-google-shopping-feed
 ```
 
 This feed automatically pulls all active products from your database and formats them according to Google Shopping requirements.
@@ -60,7 +60,7 @@ WHERE sku = 'VFD-001';
    - Select language: English
    - Feed name: "VFD Products Feed"
    - Input type: "Scheduled fetch"
-   - Feed URL: `https://ubvbvmxlwffzwrtuuxrt.supabase.co/functions/v1/generate-google-shopping-feed`
+   - Feed URL: `https://izphkdvrexejctdabplp.supabase.co/functions/v1/generate-google-shopping-feed`
    - Fetch schedule: Daily (recommended)
    - Time: Choose off-peak hours
 

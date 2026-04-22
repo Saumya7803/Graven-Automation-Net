@@ -32,8 +32,8 @@ async function trackNotificationInteraction(notificationId: string, action: stri
   if (!notificationId) return;
 
   try {
-    const SUPABASE_URL = 'https://ubvbvmxlwffzwrtuuxrt.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVidmJ2bXhsd2ZmendydHV1eHJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4MTM3NDksImV4cCI6MjA3NzM4OTc0OX0.aoAukrOCr7kAYk2huyW_slDcSt_k0Ex9z2gy5zbPHlk';
+    const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+    const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
     
     await fetch(`${SUPABASE_URL}/functions/v1/track-notification-interaction`, {
       method: 'POST',
