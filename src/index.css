@@ -241,12 +241,6 @@ All colors MUST be HSL.
   }
 }
 
-#zsiq_float {
-  bottom: 80px !important;
-  right: 20px !important;
-  z-index: 9998 !important;
-}
-
 .whatsapp-float {
   position: fixed !important;
   bottom: 20px !important;

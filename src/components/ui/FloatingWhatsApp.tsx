@@ -8,39 +8,6 @@ export const FloatingWhatsApp = () => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
-    const positionZohoChat = () => {
-      const chat = document.getElementById("zsiq_float");
-      if (!chat) return;
-
-      chat.style.bottom = "80px";
-      chat.style.right = "20px";
-      chat.style.zIndex = "9998";
-    };
-
-    positionZohoChat();
-
-    const delayedUpdate = window.setTimeout(() => {
-      positionZohoChat();
-    }, 2000);
-
-    const intervalUpdate = window.setInterval(positionZohoChat, 1500);
-    const observer = new MutationObserver(positionZohoChat);
-
-    if (document.body) {
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-      });
-    }
-
-    return () => {
-      window.clearTimeout(delayedUpdate);
-      window.clearInterval(intervalUpdate);
-      observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) {
         setIsVisible(true);
