@@ -33,6 +33,21 @@ const Home = () => {
     let intervalId: number | null = null;
     let cleanupLegacyLinks: (() => void) | null = null;
 
+    const removeLegacyPreloader = () => {
+      try {
+        const doc = iframe.contentDocument;
+        if (!doc) return;
+
+        const preloaderElements = doc.querySelectorAll<HTMLElement>("#preloader, #loader, .preloader, .th-preloader");
+        preloaderElements.forEach((element) => {
+          element.style.display = "none";
+          element.remove();
+        });
+      } catch (error) {
+        console.error("Unable to remove legacy preloader", error);
+      }
+    };
+
     const updateHeight = () => {
       try {
         const doc = iframe.contentDocument;
@@ -87,6 +102,7 @@ const Home = () => {
     };
 
     const handleLoad = () => {
+      removeLegacyPreloader();
       updateHeight();
       wireLegacyLinks();
 
