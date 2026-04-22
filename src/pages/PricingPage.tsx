@@ -214,8 +214,9 @@ export default function PricingPage() {
                       </TableCell>
                       <TableCell>{product.power_range}</TableCell>
                       {pricingData.show_exact_prices && (
-                        <TableCell className="text-right font-semibold text-primary">
-                          ₹{product.price.toLocaleString()}
+                        <TableCell className="text-right font-semibold text-primary">                          {typeof product.price === "number"
+                            ? `INR ${product.price.toLocaleString()}`
+                            : "Quote"}
                         </TableCell>
                       )}
                       <TableCell className="text-right">
