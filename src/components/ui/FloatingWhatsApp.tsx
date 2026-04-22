@@ -59,7 +59,7 @@ export const FloatingWhatsApp = () => {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="whatsapp-float">
       {showTooltip && (
         <div 
           className="absolute bottom-16 right-0 bg-white text-gray-800 px-4 py-2 rounded-lg shadow-xl animate-in slide-in-from-bottom-2 fade-in-0 whitespace-nowrap"
