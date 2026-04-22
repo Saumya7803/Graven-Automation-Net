@@ -1733,18 +1733,35 @@ textarea.is-invalid {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    height: 100%;
+    height: 100vh;
+    min-height: 100vh;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     justify-content: center;
     position: fixed;
+    inset: 0;
     left: 0;
     top: 0;
     width: 100%;
 }
 .th-preloader .animation-preloader {
-    position: absolute;
+    position: static;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    padding: 0 16px;
     z-index: 100;
 }
 .th-preloader .animation-preloader .txt-loading {
