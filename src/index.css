@@ -145,6 +145,14 @@ All colors MUST be HSL.
 
 @layer base {
   /* Critical rendering performance */
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
   html {
     font-feature-settings: "rlig" 1, "calt" 1;
     text-rendering: optimizeLegibility;
@@ -184,6 +192,14 @@ All colors MUST be HSL.
 
 .animate-homepage-marquee:hover {
   animation-play-state: paused;
+}
+
+.hero-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 /* Google Places Autocomplete Customization */
