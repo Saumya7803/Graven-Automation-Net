@@ -134,23 +134,16 @@
     <!-- SITE KEY & ReCaptcha -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Le4-gQpAAAAAHzsEiqHY1TgFPQDTSto94KGuapZ"></script>
     <style>
-      #preloader {
-        position: fixed !important;
-        inset: 0 !important;
-      }
-      #preloader .th-preloader {
-        position: fixed !important;
-        inset: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-      }
-      #preloader .th-preloader .animation-preloader {
-        position: static !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-        margin: 0 auto !important;
+      /* Temporary hotfix: disable legacy loader and render homepage immediately */
+      #preloader,
+      .preloader,
+      #loader,
+      .th-preloader,
+      .animation-preloader {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
       }
     </style>
     <!-- Local files (Style) -->
