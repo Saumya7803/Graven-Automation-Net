@@ -145,6 +145,14 @@ All colors MUST be HSL.
 
 @layer base {
   /* Critical rendering performance */
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
   html {
     font-feature-settings: "rlig" 1, "calt" 1;
     text-rendering: optimizeLegibility;
@@ -160,6 +168,7 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-display: swap;
+    min-height: 100vh;
   }
 
   /* Optimize images globally */
@@ -184,6 +193,32 @@ All colors MUST be HSL.
 
 .animate-homepage-marquee:hover {
   animation-play-state: paused;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content > main {
+  flex: 1;
+  min-height: 0;
+}
+
+.main-content > footer,
+footer {
+  margin-top: auto;
+}
+
+.main-content > main > :last-child {
+  margin-bottom: 0;
 }
 
 /* Google Places Autocomplete Customization */
