@@ -1744,7 +1744,7 @@ textarea.is-invalid {
     width: 100%;
 }
 .th-preloader .animation-preloader {
-    position: static;
+    position: absolute;
     z-index: 100;
 }
 .th-preloader .animation-preloader .txt-loading {
@@ -32627,11 +32627,4 @@ span.select2-selection.select2-selection--single:focus {
     .space-extra2-bottom {
         padding-bottom: 70px;
     }
-}
-
-.whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
 }
