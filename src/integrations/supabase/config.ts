@@ -1,9 +1,9 @@
-export const DEFAULT_SUPABASE_PROJECT_ID = "ubvbvmxlwffzwrtuuxrt";
+export const DEFAULT_SUPABASE_PROJECT_ID = "izphkdvrexejctdabplp";
 export const DEFAULT_SUPABASE_URL = `https://${DEFAULT_SUPABASE_PROJECT_ID}.supabase.co`;
 
 // Supabase publishable keys are intentionally public browser credentials.
 export const DEFAULT_SUPABASE_PUBLISHABLE_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVidmJ2bXhsd2ZmendydHV1eHJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4MTM3NDksImV4cCI6MjA3NzM4OTc0OX0.aoAukrOCr7kAYk2huyW_slDcSt_k0Ex9z2gy5zbPHlk";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml6cGhrZHZyZXhlamN0ZGFicGxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkyNjQ0MjIsImV4cCI6MjA4NDg0MDQyMn0.jMqJaivin7DqkYSrj0KM0IagkrIDK1ZhLcCqMIMOe60";
 
 const getEnvValue = (value: string | undefined, fallback: string) => {
   const trimmedValue = value?.trim();
