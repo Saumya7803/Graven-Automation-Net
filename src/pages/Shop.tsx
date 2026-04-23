@@ -124,7 +124,6 @@ const Shop = () => {
               product_categories(id, name, slug)
             )
           `)
-          .in("lifecycle_status", ["active", "discontinued"])
           .order("created_at", { ascending: false })
           .order("id", { ascending: false })
           .range(offset, offset + BATCH_SIZE - 1);

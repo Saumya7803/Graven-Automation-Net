@@ -6,8 +6,8 @@ import StructuredData from "@/components/SEO/StructuredData";
 import { generateLocalBusinessSchema, generateOrganizationSchema } from "@/lib/seo";
 
 const LEGACY_HOME_SRC = "/legacy-home/index.html";
-
 const legacyRouteMap: Record<string, string> = {
+  "shop/index.php": "/shop",
   "index.html": "/",
   "aboutus.html": "/about",
   "contactus.html": "/contact",
@@ -17,71 +17,18 @@ const legacyRouteMap: Record<string, string> = {
   "terms.html": "/terms",
   "return_shipping.html": "/shipping",
   "payment_methods.html": "/shipping",
-  "shop/index.php": "/shop",
 };
 
 const Home = () => {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
-  const [frameHeight, setFrameHeight] = useState(1800);
+  const [legacySrc] = useState(() => `${LEGACY_HOME_SRC}?v=20260423-2`);
   const navigate = useNavigate();
 
   useEffect(() => {
     const iframe = iframeRef.current;
     if (!iframe) return;
 
-    iframe.setAttribute("scrolling", "no");
-    iframe.style.overflow = "hidden";
-
-    let resizeObserver: ResizeObserver | null = null;
-    let intervalId: number | null = null;
     let cleanupLegacyLinks: (() => void) | null = null;
-
-    const disableLegacyFrameScrolling = () => {
-      try {
-        const doc = iframe.contentDocument;
-        if (!doc) return;
-
-        if (doc.documentElement) {
-          doc.documentElement.style.overflow = "hidden";
-        }
-
-        if (doc.body) {
-          doc.body.style.overflow = "hidden";
-        }
-      } catch (error) {
-        console.error("Unable to disable legacy iframe scrolling", error);
-      }
-    };
-
-    const removeLegacyPreloader = () => {
-      try {
-        const doc = iframe.contentDocument;
-        if (!doc) return;
-
-        const preloaderElements = doc.querySelectorAll<HTMLElement>("#preloader, #loader, .preloader, .th-preloader");
-        preloaderElements.forEach((element) => {
-          element.style.display = "none";
-          element.remove();
-        });
-      } catch (error) {
-        console.error("Unable to remove legacy preloader", error);
-      }
-    };
-
-    const updateHeight = () => {
-      try {
-        const doc = iframe.contentDocument;
-        if (!doc) return;
-
-        const bodyHeight = doc.body?.scrollHeight ?? 0;
-        const docHeight = doc.documentElement?.scrollHeight ?? 0;
-        const nextHeight = Math.max(bodyHeight, docHeight, 1200);
-
-        setFrameHeight((current) => (Math.abs(current - nextHeight) > 4 ? nextHeight : current));
-      } catch (error) {
-        console.error("Unable to measure legacy homepage height", error);
-      }
-    };
 
     const wireLegacyLinks = () => {
       try {
@@ -122,29 +69,7 @@ const Home = () => {
     };
 
     const handleLoad = () => {
-      removeLegacyPreloader();
-      disableLegacyFrameScrolling();
-      updateHeight();
       wireLegacyLinks();
-
-      try {
-        const doc = iframe.contentDocument;
-        if (!doc) return;
-
-        resizeObserver = new ResizeObserver(() => updateHeight());
-
-        if (doc.body) resizeObserver.observe(doc.body);
-        if (doc.documentElement) resizeObserver.observe(doc.documentElement);
-      } catch (error) {
-        console.error("Unable to observe legacy homepage size", error);
-      }
-
-      intervalId = window.setInterval(updateHeight, 750);
-      window.setTimeout(() => {
-        if (intervalId !== null) {
-          window.clearInterval(intervalId);
-        }
-      }, 12000);
     };
 
     iframe.addEventListener("load", handleLoad);
@@ -152,12 +77,8 @@ const Home = () => {
     return () => {
       iframe.removeEventListener("load", handleLoad);
       cleanupLegacyLinks?.();
-      resizeObserver?.disconnect();
-      if (intervalId !== null) {
-        window.clearInterval(intervalId);
-      }
     };
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -171,11 +92,11 @@ const Home = () => {
 
       <iframe
         ref={iframeRef}
-        src={LEGACY_HOME_SRC}
+        src={legacySrc}
         title="Graven Automation Homepage"
-        scrolling="no"
+        scrolling="yes"
         className="block w-full"
-        style={{ height: `${frameHeight}px`, border: 0, overflow: "hidden" }}
+        style={{ height: "100dvh", border: 0, overflow: "auto" }}
       />
     </div>
   );
