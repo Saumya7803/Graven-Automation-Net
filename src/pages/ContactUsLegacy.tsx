@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import SEOHead from "@/components/SEO/SEOHead";
 
-const LEGACY_ABOUT_SRC = "/legacy-home/aboutus.html";
+const LEGACY_CONTACT_US_SRC = "/legacy-home/contactus.html";
 
 const legacyRouteMap: Record<string, string> = {
   "shop/index.php": "/shop",
@@ -18,16 +18,15 @@ const legacyRouteMap: Record<string, string> = {
   "#faq-sec": "/faq.html",
   "#contact-sec": "/contactus.html",
   "faq.html": "/faq.html",
-  "/faq": "/faq.html",
   "privacy.html": "/privacy",
   "terms.html": "/terms",
   "return_shipping.html": "/shipping",
   "payment_methods.html": "/shipping",
 };
 
-const About = () => {
+const ContactUsLegacy = () => {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
-  const [legacySrc] = useState(() => `${LEGACY_ABOUT_SRC}?v=20260424-1`);
+  const [legacySrc] = useState(() => `${LEGACY_CONTACT_US_SRC}?v=20260424-1`);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,7 +68,7 @@ const About = () => {
           doc.removeEventListener("click", onDocumentClick, true);
         };
       } catch (error) {
-        console.error("Unable to bridge legacy About links", error);
+        console.error("Unable to bridge legacy Contact Us links", error);
       }
     };
 
@@ -88,15 +87,15 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEOHead
-        title="About Us | Graven Automation"
-        description="About Graven Automation"
-        canonical="/about"
+        title="Contact Us | Graven Automation"
+        description="Contact Graven Automation through our official contact page."
+        canonical="/contactus.html"
       />
 
       <iframe
         ref={iframeRef}
         src={legacySrc}
-        title="About Us"
+        title="Contact Us"
         scrolling="yes"
         className="block w-full"
         style={{ height: "100dvh", border: 0, overflow: "auto" }}
@@ -105,4 +104,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default ContactUsLegacy;

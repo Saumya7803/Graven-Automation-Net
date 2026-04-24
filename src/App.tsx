@@ -40,7 +40,10 @@ const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail"));
 
 // Lazy load non-critical pages
 const Contact = lazy(() => import("./pages/Contact"));
+const ContactUsLegacy = lazy(() => import("./pages/ContactUsLegacy"));
 const About = lazy(() => import("./pages/About"));
+const SellUs = lazy(() => import("./pages/SellUs"));
+const FaqLegacy = lazy(() => import("./pages/FaqLegacy"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const ProductComparison = lazy(() => import("./pages/ProductComparison"));
 const Auth = lazy(() => import("./pages/Auth"));
@@ -155,6 +158,12 @@ const App = () => (
                 <Route path="/location/:slug" element={<LocationPage />} />
                 <Route path="/pricing/:slug" element={<PricingPage />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/sell-us" element={<SellUs />} />
+                <Route path="/sellus" element={<SellUs />} />
+                <Route path="/contactus.html" element={<ContactUsLegacy />} />
+                <Route path="/contactus" element={<ContactUsLegacy />} />
+                <Route path="/faq.html" element={<FaqLegacy />} />
+                <Route path="/faqs" element={<FaqLegacy />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/product-comparison" element={<ProductComparison />} />
